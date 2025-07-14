@@ -1,12 +1,15 @@
 import warnings
 
-import pkg_resources
 from PIL import Image
+try:
+    from importlib.metadata import version, PackageNotFoundError
+except ImportError:  # Для Python < 3.8 можно использовать backport
+    from importlib_metadata import version, PackageNotFoundError
 
 from ._zbarlight import Symbologies
 from ._zbarlight import zbar_code_scanner
 
-__version__ = pkg_resources.get_distribution('zbarlight').version
+__version__ = version('zbarlight')
 __ALL__ = [
     'Symbologies',
     'UnknownSymbologieError',
